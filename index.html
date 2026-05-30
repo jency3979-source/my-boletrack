@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Borrow/Lend Tracker</title>
@@ -7,16 +8,51 @@
 </head>
 
 <body>
+    <div id="loader">
+        <p class="dot-loader"></p>
+        <div class="spinner"></div>
 
+        <p>Loading...</p>
+
+    </div>
     <div id="loginPage">
 
         <h2>Login / Signup</h2>
 
         <input type="text" id="username" placeholder="Username"><br>
-        <input type="password" id="password" placeholder="Password"><br>
+        <div class="password-box">
+            <input type="password" id="password" placeholder="Password">
+            <span class="toggle-eye" onclick="togglePassword()">
+
+            </span><br>
+        </div>
         <div id="btn-group">
-            <button onclick="login()">Login</button>
-            <button onclick="signup()">SignUp</button>
+            <div class="signup-top">
+
+                <button class="auth-btn" onclick="signup()">
+
+                    Sign Up
+
+                </button>
+
+            </div>
+
+
+            <div class="auth-row">
+
+                <p class="auth-label">
+
+                    Already have an account?
+
+                </p>
+
+                <button class="auth-btn" onclick="login()">
+
+                    Login
+
+                </button>
+
+            </div>
             <p class="forgot" onclick="forgotPassword()">
 
                 Forgot Password?
@@ -64,42 +100,43 @@
             </div>
         </div>
         <br><br>
+        <div class="input-group">
+            <div class="form-group">
+                <input type="text" id="name" placeholder="Person Name">
 
-        <div class="form-group">
-            <input type="text" id="name" placeholder="Person Name">
+                <input type="number" id="amount" placeholder="Amount">
 
-            <input type="number" id="amount" placeholder="Amount">
+                <select id="type">
+                    <option value="borrow">Borrowed</option>
+                    <option value="lend">Lended</option>
 
-            <select id="type">
-                <option value="borrow">Borrowed</option>
-                <option value="lend">Lent</option>
-
-            </select>
+                </select>
+            </div>
+            <button id="addBtn" onclick="addEntry()">Add</button>
         </div>
-        <button id="addBtn" onclick="addEntry()">Add</button>
-
-        <h2>Records</h2>
-        <table id="recordTable">
-            <div class="table-container">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Amount</th>
-                        <th>Settled</th>
-                        <th>Balance</th>
-                        <th>Settle</th>
-                        <th>Type</th>
-                        <th>Date & Time</th>
-                        <th>Edit</th>
-                        <th>Done</th>
-                    </tr>
-                </thead>
-
-                <tbody id="list"></tbody>
-        </table>
-    </div>
-
-    <script src="script.js"></script>
+        <div id="tableSection">
+            <h2>Records</h2>
+            <table id="recordTable">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Amount</th>
+                                <th>Settled</th>
+                                <th>Balance</th>
+                                <th>Settle</th>
+                                <th>Type</th>
+                                <th>Date & Time</th>
+                                <th>Edit</th>
+                                <th>Done</th>
+                            </tr>
+                        </thead>
+                        <tbody id="list"></tbody>
+                    </table>
+                </div>
+        </div>
+        <script src="script.js"></script>
 </body>
 
 </html>
