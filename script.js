@@ -81,6 +81,7 @@ function signup() {
 }
 
 // 🔐 LOGIN
+
 function login() {
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
@@ -88,28 +89,41 @@ function login() {
     let user = users.find(u => u.username === username && u.password === password);
 
     if (user) {
+
         localStorage.setItem("currentUser", username);
-        showApp();
+
+        showLoader(() => {
+
+            showApp();
+
+        });
+
     } else {
+
         showMsg("Invalid login ❌");
     }
 }
 
 // 🚪 LOGOUT
 function logout() {
-    let confirmLogout =
-        confirm(
-            "Are you sure you want to logout?"
-        );
 
-    if (confirmLogout) {
+    let confirmLogout =
+        confirm("Are you sure you want to logout?");
+
+    if (!confirmLogout) {
+
+        return;
+    }
+
+    showLoader(() => {
 
         localStorage.removeItem(
             "currentUser"
         );
 
         location.reload();
-    }
+
+    });
 }
 
 // UI switch
@@ -207,6 +221,20 @@ function loadData() {
     list.innerHTML = "";
 
     let data = getUserData();
+
+    let tableSection =
+        document.getElementById(
+            "tableSection"
+        );
+
+    if (data.length === 0) {
+
+        tableSection.style.display = "none";
+
+    } else {
+
+        tableSection.style.display = "block";
+    }
 
     data.forEach((item, index) => {
 
@@ -439,22 +467,65 @@ function settleAmount(index) {
         return;
     }
 
-    data[index].settled = Number(data[index].settled || 0)
+    let balance =
 
-        + Number(pay);;
+        Number(data[index].amount)
+
+        - Number(data[index].settled || 0);
+
+    if (pay > balance) {
+
+        alert(
+            "More than balance amount ❌"
+        );
+
+        return;
+    }
+    data[index].settled =
+
+        Number(data[index].settled || 0)
+
+        + Number(pay);
+
+    /* ✅ FULLY SETTLED */
 
     if (
-        data[index].settled >
-        data[index].amount
+        data[index].settled >=
+        Number(data[index].amount)
     ) {
 
-        data[index].settled =
-            data[index].amount;
+        data.splice(index, 1);
+
+        alert(
+            "Entry Settled Successfully ✅"
+        );
+
+    } else {
+
+        saveUserData(data);
     }
+
+
 
     saveUserData(data);
 
     loadData();
 
     updateDashboard();
+}
+function showLoader(callback) {
+
+    document.getElementById(
+        "loader"
+    ).style.display = "flex";
+
+    setTimeout(() => {
+
+        document.getElementById(
+            "loader"
+        ).style.display = "none";
+
+        callback();
+
+    }, 2000);
 }
