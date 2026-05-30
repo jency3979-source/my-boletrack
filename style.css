@@ -944,3 +944,376 @@ body.dark .balance-cell {
     box-shadow:
         0 2px 6px rgba(0, 0, 0, 0.35);
 }
+
+/* 🌍 RESPONSIVE FIX */
+
+* {
+
+    box-sizing: border-box;
+}
+
+body {
+
+    width: 100%;
+
+    overflow-x: hidden;
+}
+
+/* 📦 INPUTS */
+
+input,
+select,
+button {
+
+    width: 100%;
+
+    max-width: 100%;
+}
+
+/* 📋 TABLE */
+
+.table-container {
+
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+/* 📱 MOBILE */
+
+@media (max-width: 768px) {
+
+    body {
+
+        padding: 10px;
+    }
+
+    h1 {
+
+        font-size: 22px;
+
+        text-align: center;
+    }
+
+    #dashboard {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+    .card {
+
+        width: 100%;
+    }
+
+    .top-bar {
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+}
+
+#tableSection {
+
+    display: none;
+}
+
+/* 💻 LAPTOP INPUT SIZE */
+
+.input-group {
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+/* 💻 LAPTOP */
+
+.input-group input,
+.input-group select,
+.input-group button {
+
+    width: 220px;
+}
+
+/* 📱 MOBILE */
+
+@media (max-width: 768px) {
+
+    .input-group {
+
+        flex-direction: column;
+    }
+
+    .input-group input,
+    .input-group select,
+    .input-group button {
+
+        width: 100%;
+    }
+}
+
+/* 🚪 LOGOUT BUTTON */
+
+.logout-btn {
+
+    width: auto !important;
+
+    padding: 8px 14px;
+
+    font-size: 14px;
+
+    border-radius: 8px;
+}
+
+/* 📱 MOBILE */
+
+@media (max-width: 768px) {
+
+    .logout-btn {
+
+        width: 100% !important;
+    }
+}
+
+/* 🔐 AUTH TOGGLE */
+
+.auth-toggle {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-bottom: 20px;
+
+    gap: 10px;
+}
+
+/* BUTTONS */
+
+.auth-toggle button {
+
+    width: 120px;
+
+    padding: 10px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #e5e7eb;
+
+    color: black;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+/* ✨ ACTIVE BUTTON */
+
+.auth-toggle button.active {
+
+    background: #2563eb;
+
+    color: white;
+
+    font-weight: bold;
+
+    transform: scale(1.05);
+
+    box-shadow:
+        0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* 🌙 DARK MODE */
+
+body.dark .auth-toggle button {
+
+    background: #333;
+
+    color: white;
+}
+
+body.dark .auth-toggle button.active {
+
+    background: #2563eb;
+}
+
+/* 🔝 SIGNUP BUTTON TOP */
+
+.signup-top {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-bottom: 20px;
+}
+
+/* 🔘 SIGNUP BUTTON */
+
+.signup-top .auth-btn {
+
+    width: auto !important;
+
+    padding: 10px 20px;
+}
+
+/* 🔐 LOGIN ROW */
+
+.auth-row {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+/* 🔝 SIGNUP BUTTON TOP */
+
+.signup-top {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-bottom: 20px;
+}
+
+/* 🔘 SIGNUP BUTTON */
+
+.signup-top .auth-btn {
+
+    width: auto !important;
+
+    padding: 10px 20px;
+}
+
+/* 🔐 LOGIN ROW */
+
+.auth-row {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+/* ⏳ LOADER */
+
+#loader {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: white;
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-direction: column;
+
+    z-index: 9999;
+}
+
+body.dark #loader {
+
+    background: #111;
+}
+
+.spinner {
+
+    width: 30px;
+
+    height: 30px;
+
+    border: 3px solid rgba(0, 0, 0, 0.15);
+
+    border-top: 3px solid #2563eb;
+
+    border-radius: 50%;
+
+    animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ⏳ DOTS ONLY */
+
+.dot-loader {
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    letter-spacing: 5px;
+}
+
+.dot-loader::after {
+
+    content: "";
+
+    animation: dots 1.2s infinite;
+}
+
+@keyframes dots {
+
+    0% {
+        content: ".";
+    }
+
+    33% {
+        content: "..";
+    }
+
+    66% {
+        content: "...";
+    }
+
+    100% {
+        content: ".";
+    }
+}
