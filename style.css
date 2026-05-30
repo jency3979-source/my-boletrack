@@ -1317,3 +1317,40 @@ body.dark #loader {
         content: ".";
     }
 }
+.action-buttons {
+
+    display: flex;
+
+    gap: 5px;
+
+    justify-content: center;
+}
+
+.action-buttons button {
+
+    width: 35px;
+
+    height: 35px;
+
+    padding: 0;
+
+    border-radius: 8px;
+}
+
+.borrow-tag {
+
+    color: #dc2626;
+
+    font-weight: bold;
+
+    text-align: center;
+}
+
+.lend-tag {
+
+    color: #16a34a;
+
+    font-weight: bold;
+
+    text-align: center;
+}
