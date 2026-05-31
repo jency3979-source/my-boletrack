@@ -248,59 +248,52 @@ function loadData() {
 
         tr.innerHTML = `
 
-            <td>${item.name}</td>
-
-            <td>₹${item.amount}</td>
-<td>
-
-    ₹${item.settled || 0}
-
+        <td class="${item.type === "borrow"
+                ? "borrow-tag"
+                : "lend-tag"
+            }">
+    ${item.type === "borrow"
+                ? "B"
+                : "L"
+            }
 </td>
+
+<td>${item.name}</td>
+
+<td>₹${item.amount}</td>
 
 <td class="balance-cell">
 
     ₹${item.amount - (item.settled || 0)}
 
 </td>
-<td>
 
-        <button
-            onclick="settleAmount(${index})">
-            💸
-        </button>
+<td class="action-buttons">
 
-    </td>
-            <td>${item.type}</td>
-            <td>
+    <button
+        onclick="editEntry(${index})">
 
-    ${item.date || "No Date"}
+        ✏️
 
-    <br>
+    </button>
 
-    ${item.time || ""}
+    <button
+        onclick="settleAmount(${index})">
+
+        💸
+
+    </button>
+
+    <button
+        onclick="deleteEntry(${index})">
+
+        🗑️
+
+    </button>
 
 </td>
 
-            <td>
-
-                <button onclick="editEntry(${index})">
-
-                    ↻
-
-                </button>
-
-            </td>
-
-            <td>
-
-                <button onclick="deleteEntry(${index})">
-
-                    ${symbol}
-
-                </button>
-
-            </td>
-        `;
+`;
 
         list.appendChild(tr);
     });
@@ -529,3 +522,6 @@ function showLoader(callback) {
 
     }, 2000);
 }
+
+
+
