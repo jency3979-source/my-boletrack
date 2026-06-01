@@ -20,4 +20,8 @@ const auth = getAuth(app);
 window.auth = auth;
 window.RecaptchaVerifier = RecaptchaVerifier;
 window.signInWithPhoneNumber = signInWithPhoneNumber;
+
+console.log("Recaptcha:", RecaptchaVerifier);
+console.log("PhoneAuth:", signInWithPhoneNumber);
+
 console.log("Firebase Loaded ✅");
