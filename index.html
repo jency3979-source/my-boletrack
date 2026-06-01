@@ -26,6 +26,7 @@
 
             </span><br>
         </div>
+        <input type="text" id="phone" placeholder="Phone Number (+91XXXXXXXXXX)" style="display:none;"><br>
         <div id="btn-group">
             <div class="signup-top">
 
@@ -58,6 +59,7 @@
                 Forgot Password?
 
             </p>
+
         </div>
         <p id="msg"></p>
 
@@ -109,31 +111,32 @@
                 <select id="type">
                     <option value="borrow">Borrowed</option>
                     <option value="lend">Lended</option>
-
                 </select>
             </div>
             <button id="addBtn" onclick="addEntry()">Add</button>
         </div>
         <div id="tableSection">
             <h2>Records</h2>
-            <table id="recordTable">
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>B/L</th>
-                                <th>Name</th>
-                                <th>Amount</th>
-                                <th>Balance</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="list"></tbody>
-                    </table>
-                </div>
+            <div class="table-container">
+                <table id="recordTable">
+
+                    <thead>
+                        <tr>
+                            <th>B/L</th>
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th>Balance</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list"></tbody>
+                </table>
+            </div>
         </div>
         <script src="script.js"></script>
         <script type="module" src="firebase.js"></script>
+
 </body>
 
 </html>
+
