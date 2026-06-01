@@ -3,7 +3,7 @@ let users = JSON.parse(localStorage.getItem("users")) || [];
 let currentUser =
     localStorage.getItem("currentUser");
 
-
+let isSignupMode = false;
 document.addEventListener(
     "DOMContentLoaded",
     function () {
@@ -60,8 +60,19 @@ function toggleMode() {
 
 // 🔐 SIGNUP
 function signup() {
+
+    if (!isSignupMode) {
+
+        document.getElementById("phone")
+            .style.display = "block";
+
+        isSignupMode = true;
+
+        return;
+    }
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
+
 
     if (username === "" || password === "") {
         showMsg("Fill all fields");
@@ -74,7 +85,10 @@ function signup() {
         return;
     }
 
-    users.push({ username, password });
+    users.push({
+        username, password,
+        phone: document.getElementById("phone").value.trim()
+    });
     localStorage.setItem("users", JSON.stringify(users));
 
     showMsg("Signup success ✅");
@@ -83,6 +97,10 @@ function signup() {
 // 🔐 LOGIN
 
 function login() {
+    document.getElementById("phone")
+        .style.display = "none";
+
+    isSignupMode = false;
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
 
@@ -523,5 +541,19 @@ function showLoader(callback) {
     }, 2000);
 }
 
+function showSignup() {
 
+    document.getElementById("phone")
+        .style.display = "block";
+
+    signup();
+}
+
+function showLogin() {
+
+    document.getElementById("phone")
+        .style.display = "none";
+
+    login();
+}
 
