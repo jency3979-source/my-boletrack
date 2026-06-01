@@ -1,6 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 
-import { getAuth } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+import { getAuth,
+    RecaptchaVerifier,
+    signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDBj3CJBdhF06ro2DqR3VX38lOiQUq_KLA",
@@ -17,5 +19,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 window.auth = auth;
-
+window.RecaptchaVerifier = RecaptchaVerifier;
+window.signInWithPhoneNumber = signInWithPhoneNumber;
 console.log("Firebase Loaded ✅");
