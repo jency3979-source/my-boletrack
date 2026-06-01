@@ -4,6 +4,7 @@ let currentUser =
     localStorage.getItem("currentUser");
 
 let isSignupMode = false;
+let confirmationResult = null;
 document.addEventListener(
     "DOMContentLoaded",
     function () {
@@ -74,10 +75,17 @@ function signup() {
     let password = document.getElementById("password").value;
 
 
-    if (username === "" || password === "") {
-        showMsg("Fill all fields");
-        return;
-    }
+    let phone =
+    document.getElementById("phone").value.trim();
+
+if (
+    username === "" ||
+    password === "" ||
+    phone === ""
+) {
+    showMsg("Fill all fields");
+    return;
+}
 
     let exists = users.find(u => u.username === username);
     if (exists) {
@@ -432,10 +440,11 @@ function updateDashboard() {
         </div>
     `;
 }
-function forgotPassword() {
+async function forgotPassword() {
 
-    let username =
-        prompt("Enter Username");
+    let username = prompt("Enter Username");
+
+    if (!username) return;
 
     let users =
         JSON.parse(localStorage.getItem("users")) || [];
@@ -443,16 +452,54 @@ function forgotPassword() {
     let user =
         users.find(u => u.username === username);
 
-    if (user) {
-
-        alert(
-            "Your Password is : " + user.password
-        );
-    }
-
-    else {
+    if (!user) {
 
         alert("User not found ❌");
+        return;
+    }
+
+    try {
+
+        window.recaptchaVerifier =
+            new RecaptchaVerifier(
+                auth,
+                "recaptcha-container",
+                {}
+            );
+
+        confirmationResult =
+            await signInWithPhoneNumber(
+                auth,
+                user.phone,
+                window.recaptchaVerifier
+            );
+
+        let otp =
+            prompt("Enter OTP");
+
+        await confirmationResult.confirm(otp);
+
+        let newPassword =
+            prompt("Enter New Password");
+
+        user.password = newPassword;
+
+        localStorage.setItem(
+            "users",
+            JSON.stringify(users)
+        );
+
+        alert(
+            "Password changed successfully ✅"
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "OTP verification failed ❌"
+        );
     }
 }
 function handleEnter(event) {
@@ -556,4 +603,10 @@ function showLogin() {
 
     login();
 }
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.auth = auth;
+window.RecaptchaVerifier = RecaptchaVerifier;
+window.signInWithPhoneNumber = signInWithPhoneNumber;
 
