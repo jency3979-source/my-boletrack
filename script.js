@@ -36,8 +36,6 @@ document.addEventListener(
 let toggle = document.getElementById("modeToggle");
 let icon = document.getElementById("modeIcon");
 
-
-
 function toggleMode() {
     let body = document.body;
     let icon = document.getElementById("modeIcon");
@@ -56,9 +54,6 @@ function toggleMode() {
         icon.innerText = "☀️"; // light mode
     }
 }
-
-
-
 // 🔐 SIGNUP
 function signup() {
 
@@ -76,16 +71,21 @@ function signup() {
 
 
     let phone =
-    document.getElementById("phone").value.trim();
+        document.getElementById("phone").value.trim();
 
-if (
-    username === "" ||
-    password === "" ||
-    phone === ""
-) {
-    showMsg("Fill all fields");
-    return;
-}
+    if (!phone.startsWith("+91")) {
+        showMsg("Phone number must start with +91");
+        return;
+    }
+
+    if (
+        username === "" ||
+        password === "" ||
+        phone === ""
+    ) {
+        showMsg("Fill all fields");
+        return;
+    }
 
     let exists = users.find(u => u.username === username);
     if (exists) {
@@ -108,7 +108,7 @@ function login() {
     document.getElementById("phone")
         .style.display = "none";
 
-    isSignupMode = false;
+    let isSignupMode = false;
     let username = document.getElementById("username").value;
     let password = document.getElementById("password").value;
 
@@ -320,14 +320,11 @@ function loadData() {
 </td>
 
 `;
-
         list.appendChild(tr);
     });
 
     updateDashboard();
 }
-
-
 let editIndex = -1;
 
 function editEntry(index) {
@@ -363,10 +360,6 @@ function saveEdit(index) {
 
     loadData();
 }
-
-
-
-
 // ❌ DELETE
 function deleteEntry(index) {
     let data = getUserData();
@@ -440,75 +433,24 @@ function updateDashboard() {
         </div>
     `;
 }
-async function forgotPassword() {
+function forgotPassword() {
 
     let username = prompt("Enter Username");
 
-    if (!username) return;
+    let users = JSON.parse(localStorage.getItem("users")) || [];
 
-    let users =
-        JSON.parse(localStorage.getItem("users")) || [];
+    let user = users.find(u => u.username === username);
 
-    let user =
-        users.find(u => u.username === username);
+    if (user) {
 
-    if (!user) {
+        alert("Your Password is : " + user.password);
+
+    } else {
 
         alert("User not found ❌");
-        return;
-    }
-
-    try {
-
-        window.recaptchaVerifier =
-            new RecaptchaVerifier(
-                auth,
-                "recaptcha-container",
-                {}
-            );
-
-        confirmationResult =
-            await signInWithPhoneNumber(
-                auth,
-                user.phone,
-                window.recaptchaVerifier
-            );
-
-        let otp =
-            prompt("Enter OTP");
-
-        await confirmationResult.confirm(otp);
-
-        let newPassword =
-            prompt("Enter New Password");
-
-        user.password = newPassword;
-
-        localStorage.setItem(
-            "users",
-            JSON.stringify(users)
-        );
-
-        alert(
-            "Password changed successfully ✅"
-        );
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert(
-            "OTP verification failed ❌"
-        );
     }
 }
-function handleEnter(event) {
 
-    if (event.key === "Enter") {
-
-        addEntry();
-    }
-}
 function settleAmount(index) {
 
     let data = getUserData();
@@ -562,9 +504,6 @@ function settleAmount(index) {
 
         saveUserData(data);
     }
-
-
-
     saveUserData(data);
 
     loadData();
@@ -603,10 +542,4 @@ function showLogin() {
 
     login();
 }
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-window.auth = auth;
-window.RecaptchaVerifier = RecaptchaVerifier;
-window.signInWithPhoneNumber = signInWithPhoneNumber;
 
