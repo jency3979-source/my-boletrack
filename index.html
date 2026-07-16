@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Borrow/Lend Tracker</title>
     <link rel="stylesheet" href="style.css">
@@ -22,11 +23,9 @@
         <input type="text" id="username" placeholder="Username"><br>
         <div class="password-box">
             <input type="password" id="password" placeholder="Password">
-            <span class="toggle-eye" onclick="togglePassword()">
-
-            </span><br>
+            <span class="toggle-eye" onclick="togglePassword()"></span><br>
         </div>
-        <input type="text" id="phone" placeholder="Phone Number (+91XXXXXXXXXX)" style="display:none;"><br>
+        <input type="text" id="phone" placeholder="+91XXXXXXXXXX" style="display:none;"><br>
         <div id="btn-group">
             <div class="signup-top">
 
@@ -35,16 +34,11 @@
                     Sign Up
 
                 </button>
-
             </div>
-
-
             <div class="auth-row">
 
                 <p class="auth-label">
-
                     Already have an account?
-
                 </p>
 
                 <button class="auth-btn" onclick="login()">
@@ -57,9 +51,7 @@
             <p class="forgot" onclick="forgotPassword()">
 
                 Forgot Password?
-
             </p>
-
         </div>
         <p id="msg"></p>
 
@@ -133,9 +125,8 @@
                 </table>
             </div>
         </div>
+
         <script src="script.js"></script>
-        <script type="module" src="firebase.js"></script>
-        <div id="recaptcha-container"></div>
 </body>
 
 </html>
